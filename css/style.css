@@ -1,0 +1,1241 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:root {
+  --ink: #2b2b2b;
+  --paper: #fdfdf8;
+  --screen-bg: #e9efe6;
+  --screen-dark: #1c2430;
+  --red: #c33b3b;
+  --orange: #d78c2e;
+  --green: #7ac142;
+  --hp-green: #3fd23f;
+  --hp-orange: #e8a33d;
+  --muted: #98988a;
+  --blue: #2e6fd7;
+  --font-pixel: "Press Start 2P", monospace;
+  --font-body: "VT323", monospace;
+}
+
+html,
+body {
+  min-height: 100%;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background-color: #aee0f8;
+}
+
+/* ---------- Sunny pixel sky ---------- */
+
+.page {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 28px 16px;
+  background: linear-gradient(180deg, #aee0f8 0%, #dff2ff 45%, #eaf7e6 78%, #c9ecc0 100%);
+}
+
+.bg-clouds {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-clouds span {
+  position: absolute;
+  left: -18em;
+  font-size: 10px;
+  width: 7em;
+  height: 2.5em;
+  background: #ffffff;
+  box-shadow: 0 0.5em 0 rgba(110, 168, 220, 0.25);
+  animation: cloud-drift var(--dur, 60s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.bg-clouds span::before,
+.bg-clouds span::after {
+  content: '';
+  position: absolute;
+  background: #ffffff;
+}
+
+.bg-clouds span::before {
+  width: 3em;
+  height: 2em;
+  left: 1em;
+  top: -1.5em;
+}
+
+.bg-clouds span::after {
+  width: 2em;
+  height: 1.5em;
+  left: 4.2em;
+  top: -1em;
+}
+
+@keyframes cloud-drift {
+  to {
+    transform: translateX(calc(100vw + 40em));
+  }
+}
+
+.bg-clouds span:nth-child(1) { top: 6%; font-size: 12px; --dur: 55s; --delay: -20s; }
+.bg-clouds span:nth-child(2) { top: 16%; font-size: 8px; --dur: 80s; --delay: -50s; opacity: 0.8; }
+.bg-clouds span:nth-child(3) { top: 30%; font-size: 10px; --dur: 65s; --delay: -35s; }
+.bg-clouds span:nth-child(4) { top: 48%; font-size: 7px; --dur: 90s; --delay: -10s; opacity: 0.75; }
+.bg-clouds span:nth-child(5) { top: 62%; font-size: 9px; --dur: 72s; --delay: -60s; opacity: 0.85; }
+
+.bg-sprites {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-sprites span {
+  position: absolute;
+  bottom: -40px;
+  width: 1em;
+  height: 1em;
+  font-size: 8px;
+  background: currentColor;
+  box-shadow: 0 -1em currentColor, 0 1em currentColor, -1em 0 currentColor, 1em 0 currentColor;
+  animation: float-up var(--dur, 26s) linear infinite, twinkle 2.4s infinite;
+  animation-delay: var(--delay, 0s), 0s;
+}
+
+@keyframes float-up {
+  to {
+    transform: translateY(calc(-100dvh - 120px));
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  49.9% {
+    opacity: 0.85;
+  }
+  50%,
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.bg-sprites span:nth-child(1) { left: 4%; color: #f5b83d; --dur: 24s; --delay: -6s; }
+.bg-sprites span:nth-child(2) { left: 9%; color: #ff8fb0; font-size: 5px; --dur: 34s; --delay: -20s; }
+.bg-sprites span:nth-child(3) { left: 14%; color: #7ac142; font-size: 7px; --dur: 28s; --delay: -12s; }
+.bg-sprites span:nth-child(4) { left: 19%; color: #f5b83d; font-size: 5px; --dur: 38s; --delay: -30s; }
+.bg-sprites span:nth-child(5) { left: 7%; color: #5ea7dd; font-size: 6px; --dur: 31s; --delay: -25s; }
+.bg-sprites span:nth-child(6) { left: 24%; color: #ff8fb0; font-size: 4px; --dur: 42s; --delay: -8s; }
+.bg-sprites span:nth-child(7) { left: 78%; color: #f5b83d; font-size: 7px; --dur: 27s; --delay: -16s; }
+.bg-sprites span:nth-child(8) { left: 84%; color: #7ac142; font-size: 5px; --dur: 36s; --delay: -4s; }
+.bg-sprites span:nth-child(9) { left: 89%; color: #ff8fb0; font-size: 8px; --dur: 23s; --delay: -28s; }
+.bg-sprites span:nth-child(10) { left: 94%; color: #5ea7dd; font-size: 5px; --dur: 33s; --delay: -14s; }
+.bg-sprites span:nth-child(11) { left: 97%; color: #f5b83d; font-size: 6px; --dur: 29s; --delay: -22s; }
+.bg-sprites span:nth-child(12) { left: 74%; color: #7ac142; font-size: 4px; --dur: 40s; --delay: -10s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-sprites,
+  .bg-clouds {
+    display: none;
+  }
+}
+
+/* ---------- App card ---------- */
+
+/* Transparent layout column — the sky shows between the cards */
+.app {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: fit-content;
+  position: relative;
+  z-index: 1;
+  transition: max-width 0.45s cubic-bezier(0.22, 0.75, 0.25, 1);
+}
+
+.app.open {
+  max-width: 560px;
+}
+
+/* Grid-paper card, applied per section instead of one big slab */
+.booth-left,
+.booth-right-inner {
+  background-color: var(--screen-bg);
+  background-image: repeating-linear-gradient(
+      0deg,
+      rgba(96, 140, 110, 0.16) 0px,
+      rgba(96, 140, 110, 0.16) 1px,
+      transparent 1px,
+      transparent 24px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(96, 140, 110, 0.16) 0px,
+      rgba(96, 140, 110, 0.16) 1px,
+      transparent 1px,
+      transparent 24px
+    );
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 0 6px 0 rgba(60, 90, 70, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.5);
+  padding: 14px;
+}
+
+/* Logo floats directly on the sky, nothing behind it */
+.site-logo {
+  align-self: center;
+  width: min(300px, 70%);
+  height: auto;
+  filter: drop-shadow(0 4px 0 rgba(43, 43, 43, 0.22));
+}
+
+/* ---------- Top bar ---------- */
+
+.topbar {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.topbar-title {
+  font-family: var(--font-pixel);
+  font-size: 13px;
+}
+
+.live {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: blinkD 1.2s infinite;
+}
+
+@keyframes blinkD {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Booth (preview + menu) ---------- */
+
+.booth {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  min-height: 0;
+}
+
+.booth-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+  min-width: 0;
+}
+
+.capture-stack {
+  width: min(100%, 440px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.capture-stack > .polaroid-card,
+.capture-stack > .go-snap {
+  width: 100%;
+  flex: none;
+}
+
+/* Menus are hidden until GO is pressed (mobile: appear below) */
+.booth-right {
+  display: none;
+}
+
+.app.open .booth-right {
+  display: block;
+  animation: menu-rise 0.35s ease;
+}
+
+@keyframes menu-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.booth-right-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+  height: 100%;
+}
+
+/* ---------- Polaroid card + stage ---------- */
+
+.polaroid-card {
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  padding: 12px 12px 0;
+  box-shadow: 0 5px 0 rgba(43, 43, 43, 0.9);
+  width: min(100%, 440px);
+}
+
+.stage {
+  position: relative;
+  aspect-ratio: 3 / 4; /* same shape as the saved photo */
+  background: var(--screen-dark);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stage video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scaleX(-1); /* mirror like a selfie */
+}
+
+#overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.camera-error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: repeating-linear-gradient(
+    45deg,
+    #26303f 0px,
+    #26303f 14px,
+    var(--screen-dark) 14px,
+    var(--screen-dark) 28px
+  );
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.camera-error-title {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.retry-btn {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  padding: 14px 18px;
+  background: var(--red);
+  color: #fff;
+  border: 3px solid #fff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.countdown {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.countdown-num {
+  font-family: var(--font-pixel);
+  font-size: clamp(70px, 22vmin, 110px);
+  color: #fff;
+  text-shadow: 7px 7px 0 var(--ink);
+  animation: popN 1s infinite;
+}
+
+.countdown-warning {
+  font-family: var(--font-pixel);
+  font-size: clamp(11px, 3vmin, 16px);
+  color: var(--hp-orange);
+  text-shadow: 3px 3px 0 var(--ink);
+  animation: blinkWarn 0.5s steps(1) infinite;
+}
+
+@keyframes blinkWarn {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes popN {
+  0% {
+    transform: scale(1.35);
+    opacity: 0.4;
+  }
+  30% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Bouncing triangle pointing at the device's camera during the 3-2-1.
+   Default (phones + landscape tablets): camera is top-center, arrow
+   points up. Portrait tablets: camera sits middle-right, arrow points
+   right (see media query below). */
+.cam-arrow {
+  position: fixed;
+  z-index: 25;
+  top: 8px;
+  left: 50%;
+  pointer-events: none;
+  animation: cam-bounce-y 0.6s ease-in-out infinite;
+}
+
+.cam-arrow::before {
+  content: '';
+  display: block;
+  border: 18px solid transparent;
+  border-top: none;
+  border-bottom: 26px solid var(--red);
+  filter: drop-shadow(0 3px 0 var(--ink)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+}
+
+@keyframes cam-bounce-y {
+  0%,
+  100% {
+    transform: translate(-50%, 12px);
+  }
+  50% {
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (min-width: 621px) and (orientation: portrait) {
+  .cam-arrow {
+    top: 50%;
+    left: auto;
+    right: 8px;
+    animation: cam-bounce-x 0.6s ease-in-out infinite;
+  }
+
+  .cam-arrow::before {
+    border: 18px solid transparent;
+    border-right: none;
+    border-left: 26px solid var(--red);
+  }
+}
+
+@keyframes cam-bounce-x {
+  0%,
+  100% {
+    transform: translate(-12px, -50%);
+  }
+  50% {
+    transform: translate(0, -50%);
+  }
+}
+
+/* The screen IS the flash: full-viewport white-out at capture time. */
+.screen-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #fff;
+  opacity: 0;
+  transition: opacity 0.45s ease-out; /* fade back down, revealing the result */
+  pointer-events: none;
+}
+
+.screen-flash.on {
+  opacity: 1;
+  transition: opacity 0.08s ease-in; /* snap to full white */
+}
+
+.polaroid-strip {
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.caption-text {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+}
+
+.caption-date {
+  font-size: 18px;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+
+/* ---------- GO / SNAP button ---------- */
+
+.go-snap {
+  width: min(100%, 440px);
+  font-family: var(--font-pixel);
+  color: #fff;
+  background: var(--red);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  min-height: 66px;
+  box-shadow: 0 5px 0 var(--ink);
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.go-snap::after {
+  content: '';
+  position: absolute;
+  inset: 3px 3px auto;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.go-snap-label {
+  font-size: 18px;
+}
+
+
+
+.go-snap:hover {
+  background: #d84848;
+}
+
+.go-snap:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--ink);
+}
+
+.go-snap:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* ---------- Dialog ---------- */
+
+.dialog {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.dialog-inner {
+  border: 2px solid #9aa0a6;
+  border-radius: 5px;
+  padding: 10px 14px;
+  font-size: 24px;
+}
+
+/* ---------- Pokémon-style menu ---------- */
+
+.menu-box {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  padding: 12px 10px;
+  box-shadow: 0 3px 0 var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 0;
+  overflow-y: auto; /* only this box scrolls, never the page (tablet) */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- One-time tutorial spotlight ----------
+   A fixed dark sheet covers everything; .menu-spot (the frame/filter menu)
+   gets a z-index above it, so only that box stays lit. The speech bubble
+   hangs off the wrapper, out of the layout flow. */
+
+.hint-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background: rgba(12, 18, 28, 0.62);
+  animation: backdrop-in 0.35s ease;
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Wrapper exists so the bubble has a non-scrolling box to anchor to
+   (.menu-box itself scrolls and would clip an absolute child) */
+.menu-spot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.menu-spot > .menu-box {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Spotlit: menu pops above the dark sheet with a glow ring */
+.hint-spot .menu-spot {
+  z-index: 6;
+}
+
+.hint-spot .menu-box {
+  box-shadow: 0 3px 0 var(--ink), 0 0 0 4px #fff, 0 0 26px rgba(255, 255, 255, 0.6);
+}
+
+/* Speech bubble overlapping the top edge of the spotlit menu box */
+.menu-hint {
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  width: max-content;
+  max-width: min(320px, 84vw);
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 0 3px 0 var(--ink);
+  padding: 12px 16px;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  line-height: 1.8;
+  text-align: center;
+  animation: hint-bob 0.9s ease-in-out infinite;
+  z-index: 7;
+  pointer-events: none;
+}
+
+/* Downward arrow tail — points at the menu box below the bubble */
+.menu-hint::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -13px;
+  transform: translateX(-50%);
+  border: 11px solid transparent;
+  border-top-color: var(--ink);
+  border-bottom: none;
+}
+
+.menu-hint::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: #fff;
+  border-bottom: none;
+  z-index: 1;
+}
+
+@keyframes hint-bob {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+
+.menu-heading {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  padding: 6px 8px 2px;
+}
+
+.menu-heading + .menu-heading,
+.menu-list + .menu-heading {
+  margin-top: 8px;
+  border-top: 2px dashed rgba(43, 43, 43, 0.2);
+  padding-top: 12px;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--ink);
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 8px 10px 28px;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: rgba(122, 193, 66, 0.14);
+}
+
+.menu-item.selected::before {
+  content: '\25B6';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+}
+
+.menu-item.selected {
+  background: rgba(242, 197, 61, 0.22);
+}
+
+.menu-thumb {
+  display: block;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 45px;
+  border: 2px solid var(--ink);
+  border-radius: 5px;
+  background-image: linear-gradient(160deg, #ff9d6e 0%, #ffd23e 35%, #7ac142 65%, #2e6fd7 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Frame chips: pixel pokéball with the pokémon's sprite popping out over it */
+.ball-icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 46px;
+  height: 44px;
+}
+
+.ball-img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  image-rendering: pixelated;
+}
+
+.ball-sprite {
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(1px 1px 0 rgba(43, 43, 43, 0.3));
+}
+
+/* NONE: just the empty ball, centered */
+.ball-icon.empty .ball-img {
+  inset: 0;
+  margin: auto;
+  width: 34px;
+  height: 34px;
+}
+
+/* ---------- Status card ---------- */
+
+.status-card {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow: 0 3px 0 var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+}
+
+.hp-pill {
+  background: var(--ink);
+  border-radius: 999px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hp-label {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--hp-orange);
+}
+
+.hp-bar {
+  flex: 1;
+  height: 10px;
+  background: var(--hp-green);
+  border-radius: 999px;
+}
+
+/* ---------- Result overlay ---------- */
+
+.result-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(20, 25, 35, 0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 24px;
+}
+
+.result-title {
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  color: #fff;
+}
+
+/* The polaroid look here is preview-only styling — the downloaded file is
+   just the 3:4 photo with its frame. */
+.result-card {
+  width: min(74vw, calc((100dvh - 320px) * 0.75), 480px);
+  transform: rotate(-2deg);
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.4);
+}
+
+.result-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--screen-dark);
+}
+
+.result-btns {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-share,
+.btn-save,
+.btn-retake {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  text-decoration: none;
+  color: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 0 var(--ink);
+  cursor: pointer;
+}
+
+.btn-share {
+  background: var(--orange);
+}
+
+.btn-save {
+  background: var(--green);
+}
+
+.btn-retake {
+  background: var(--blue);
+}
+
+.result-tip {
+  font-size: 18px;
+  color: #cfd6cf;
+  text-align: center;
+  letter-spacing: 1px;
+  max-width: 340px;
+}
+
+/* ---------- Phones: full-bleed card ---------- */
+
+@media (max-width: 620px) {
+  .page {
+    padding: 14px 10px;
+  }
+  .site-logo {
+    order: 99;
+    margin: 8px 0 2px;
+  }
+}
+
+/* ---------- Landscape tablet / desktop: one screen, side menu ---------- */
+
+@media (min-width: 900px) and (min-height: 650px) and (orientation: landscape) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .page {
+    height: 100dvh;
+    overflow: hidden;
+    padding: 18px;
+    align-items: center;
+  }
+
+  .app {
+    max-width: 520px;
+    height: min(100%, 1100px);
+    overflow: hidden;
+    padding: 2px 2px 10px;
+  }
+
+  .app.open {
+    max-width: 1020px;
+    height: min(100%, 1100px);
+  }
+
+  .site-logo {
+    width: min(220px, 70%);
+  }
+
+  .booth {
+    flex-direction: row;
+    align-items: stretch; /* both columns always the same height */
+    gap: 0;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Preview column: full width before GO, ~2/3 once the menus are open */
+  .booth-left {
+    flex: 2 1 0%;
+    min-width: 0;
+    justify-content: center;
+    gap: 14px;
+    container-type: size; /* photo sizes from the column height, open or not */
+  }
+
+  /* Size from the booth itself, not the viewport. This keeps the photo inside
+     its column when a portrait tablet leaves less usable room, and lets it
+     grow to fill the height on big landscape tablets (iPad Pro). */
+  .polaroid-card {
+    width: min(100%, 500px, calc((100cqh - 164px) * 0.75));
+  }
+
+  .stage {
+    width: 100%;
+  }
+
+  .go-snap {
+    width: min(100%, 500px, calc((100cqh - 164px) * 0.75));
+  }
+
+  .capture-stack {
+    width: min(100%, 500px, calc((100cqh - 164px) * 0.75));
+  }
+
+  .capture-stack > .polaroid-card,
+  .capture-stack > .go-snap {
+    width: 100%;
+  }
+
+  /* Menu column: slides open to a fixed width (~1/3 of the booth);
+     only the menu box scrolls */
+  .booth-right {
+    display: block;
+    flex: 0 0 auto;
+    min-width: 0;
+    align-self: center;
+    width: 0;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+    transform: translateX(30px);
+    overflow: hidden;
+    transition: width 0.45s ease, padding 0.45s ease, opacity 0.3s ease,
+      transform 0.45s ease;
+  }
+
+  .app.open .booth-right {
+    width: 334px;
+    height: auto;
+    align-self: stretch;
+    /* left side doubles as the gap; the rest is room for ring + shadow */
+    padding: 5px 6px 12px 14px;
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .booth-right-inner {
+    width: 314px; /* fixed so content keeps its shape mid-slide */
+    height: 100%;
+  }
+
+  .menu-spot {
+    flex: 1;
+  }
+}
+
+/* Tablet portrait: single column like phones, just with wider margins.
+   One width for both states — the card hugs the (height-capped) preview
+   instead of leaving it swimming in grid paper. */
+@media (min-width: 621px) and (max-width: 899px) {
+  .page {
+    padding-inline: 24px;
+  }
+
+  .app,
+  .app.open {
+    max-width: 560px;
+  }
+}
+
+/* Large portrait tablets (iPad Pro): same footer layout, roomier card */
+@media (min-width: 900px) and (orientation: portrait) {
+  .page {
+    padding-inline: 24px;
+  }
+
+  .app,
+  .app.open {
+    max-width: 720px;
+  }
+}
+
+/* ---------- Phones + portrait tablets: one screen, never scrolls.
+   The photo sizes itself from the height that's left, and the frame/filter
+   menus open as a mini footer with horizontally scrolling rows, so the
+   preview always stays on screen. Applies to every portrait screen —
+   including iPad Pro, which is 900px+ wide but should never get the
+   landscape side-menu layout. ---------- */
+@media (max-width: 899px), (orientation: portrait) {
+  .page {
+    height: 100dvh;
+    overflow: hidden;
+    padding-top: 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .app {
+    height: 100%;
+  }
+
+  /* GO: the logo glides away (and back) instead of popping out of the layout */
+  .site-logo {
+    max-height: 140px;
+    object-fit: contain;
+    transition: max-height 0.45s cubic-bezier(0.22, 0.75, 0.25, 1),
+      margin 0.45s cubic-bezier(0.22, 0.75, 0.25, 1),
+      transform 0.45s cubic-bezier(0.22, 0.75, 0.25, 1),
+      opacity 0.3s ease;
+  }
+
+  .app.open .site-logo {
+    max-height: 0;
+    margin: -7px 0; /* swallows the flex gap it leaves behind */
+    opacity: 0;
+    transform: translateY(-24px);
+    pointer-events: none;
+  }
+
+  .booth-left {
+    flex: 1;
+    justify-content: center;
+    container-type: size; /* lets the photo size from the leftover height */
+  }
+
+  /* Slimmer strip + button so the photo gets the height they give up */
+  .polaroid-strip {
+    height: 60px;
+  }
+
+  .go-snap {
+    min-height: 58px;
+  }
+
+  /* 152px = polaroid padding + caption strip + borders + gap + SNAP button */
+  .capture-stack {
+    width: min(100%, max(140px, calc((100cqh - 152px) * 0.75)));
+    transition: width 0.45s cubic-bezier(0.22, 0.75, 0.25, 1);
+  }
+
+  /* --- Mini footer: FRAME and FILTER as horizontal chip rows --- */
+
+  .app.open .booth-right {
+    flex: none;
+    min-height: 0;
+  }
+
+  .booth-right-inner {
+    height: auto;
+    padding: 8px;
+  }
+
+  /* Desktop dressing — hidden so the footer stays mini */
+  .booth-right .dialog,
+  .booth-right .status-card {
+    display: none;
+  }
+
+  .menu-box {
+    padding: 6px 8px;
+    gap: 2px;
+  }
+
+  .menu-heading {
+    padding: 2px 4px;
+  }
+
+  .menu-list + .menu-heading {
+    margin-top: 6px;
+    padding-top: 8px;
+  }
+
+  .menu-list {
+    flex-direction: row;
+    gap: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 2px;
+  }
+
+  .menu-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .menu-item {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 5px 12px 5px 24px;
+    border: 2px solid rgba(43, 43, 43, 0.14);
+    border-radius: 8px;
+  }
+
+  .menu-item.selected {
+    border-color: var(--ink);
+  }
+
+  .menu-thumb {
+    width: 28px;
+    height: 36px;
+  }
+
+  .ball-icon {
+    width: 38px;
+    height: 36px;
+  }
+
+  .ball-img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ball-sprite {
+    width: 30px;
+    height: 30px;
+  }
+
+  .ball-icon.empty .ball-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .menu-hint {
+    font-size: 9px;
+    padding: 10px 12px;
+  }
+}
+
+/* Phones keep the logo below the booth, so it exits downward instead */
+@media (max-width: 620px) {
+  .app.open .site-logo {
+    transform: translateY(24px);
+  }
+}

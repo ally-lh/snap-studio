@@ -1,0 +1,14 @@
+{
+  "name": "Snap Studio Photobooth",
+  "short_name": "SNAP-STUDIO",
+  "description": "Retro battle-style photobooth — pick a frame and filter, SNAP, save a polaroid!",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#e9efe6",
+  "theme_color": "#aee0f8",
+  "icons": [
+    { "src": "icons/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

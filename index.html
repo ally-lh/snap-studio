@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#aee0f8">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" href="icons/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Snap Studio Photobooth</title>
+</head>
+<body>
+  <div class="page">
+    <div class="bg-clouds" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="bg-sprites" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <main class="app" id="app">
+      <img id="brand-logo" class="site-logo" alt="Duanato" hidden>
+
+      <header class="topbar">
+        <span class="topbar-title">&#9776; SNAP-STUDIO!</span>
+        <span class="live"><span class="live-dot"></span>LIVE</span>
+      </header>
+
+      <div class="booth">
+        <div class="booth-left">
+          <div class="capture-stack">
+            <section class="polaroid-card">
+              <div class="stage">
+                <video id="video" playsinline autoplay muted></video>
+                <canvas id="overlay" aria-hidden="true"></canvas>
+                <div id="camera-error" class="camera-error" hidden>
+                  <span class="camera-error-title">CAMERA NOT FOUND!</span>
+                  <button id="retry-camera" class="retry-btn" type="button">START CAMERA</button>
+                </div>
+                <div id="countdown" class="countdown" hidden>
+                  <span id="countdown-num" class="countdown-num"></span>
+                  <span class="countdown-warning">&#9888; FLASH INCOMING!</span>
+                </div>
+              </div>
+              <div class="polaroid-strip">
+                <span id="caption" class="caption-text"></span>
+                <span id="date-str" class="caption-date"></span>
+              </div>
+            </section>
+            <button id="go-snap" class="go-snap" type="button">
+              <span id="go-snap-label" class="go-snap-label">&#9654; GO</span>
+            
+            </button>
+          </div>
+        </div>
+
+        <aside class="booth-right" id="booth-right">
+          <div class="booth-right-inner">
+            <section class="dialog">
+              <div class="dialog-inner">&#9654; <span id="prompt-text">What will YOU do?</span></div>
+            </section>
+            <div class="menu-spot">
+              <div id="menu-hint" class="menu-hint" hidden>
+                PICK A POK&Eacute;MON,<br>THEN PICK A FILTER!
+              </div>
+              <nav class="menu-box" aria-label="Frames and filters">
+                <p class="menu-heading">FRAME</p>
+                <div id="panel-frames" class="menu-list"></div>
+                <p class="menu-heading">FILTER</p>
+                <div id="panel-filters" class="menu-list"></div>
+              </nav>
+            </div>
+            <section class="status-card">
+              <div class="status-row">
+                <span id="status-frame">FRAME:GENGAR</span>
+                <span id="status-filter">FILTER:NORMAL</span>
+              </div>
+              <div class="hp-pill">
+                <span class="hp-label">HP</span>
+                <div class="hp-bar"></div>
+              </div>
+            </section>
+          </div>
+        </aside>
+      </div>
+
+      <div id="hint-backdrop" class="hint-backdrop" hidden></div>
+    </main>
+  </div>
+
+  <div id="result" class="result-backdrop" hidden>
+    <span class="result-title">GOTCHA!</span>
+    <div class="polaroid-card result-card">
+      <img id="result-photo" class="result-photo" alt="Your photo">
+      <div class="polaroid-strip">
+        <span id="result-caption" class="caption-text"></span>
+        <span id="result-date" class="caption-date"></span>
+      </div>
+    </div>
+    <div class="result-btns">
+      <button id="share" class="btn-share" type="button" hidden>&#8679; SHARE</button>
+      <a id="save-link" class="btn-save" href="#" download="snap-studio.png">&#9660; SAVE</a>
+      <button id="retake" class="btn-retake" type="button">RETAKE</button>
+    </div>
+    <p class="result-tip">SHARE opens AirDrop &amp; Save to Photos &middot; SAVE downloads a copy</p>
+  </div>
+
+  <div id="cam-arrow" class="cam-arrow" aria-hidden="true" hidden></div>
+  <div id="screen-flash" class="screen-flash" aria-hidden="true"></div>
+
+  <script src="js/filters.js" defer></script>
+  <script src="js/frames.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
