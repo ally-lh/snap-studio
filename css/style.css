@@ -922,6 +922,12 @@ body {
   background: var(--screen-dark);
 }
 
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .result-btns {
   display: flex;
   gap: 12px;
@@ -956,8 +962,8 @@ body {
 
 .btn-home {
   background: var(--red);
-  font-size: 10px;
-  padding: 14px 20px;
+  width: 100%; /* span the full width of the button row above */
+  text-align: center;
 }
 
 .result-tip {

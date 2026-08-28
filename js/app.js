@@ -461,6 +461,13 @@ async function capture() {
   }, 'image/png');
 }
 
+function goHome() {
+  // Hide the modal before reloading — iOS home-screen apps can restore the
+  // page from a snapshot, which would bring the open GOTCHA screen back.
+  els.result.hidden = true;
+  location.reload();
+}
+
 function retake() {
   els.result.hidden = true;
   els.app.classList.add('open'); // reopen the menus for the next round
@@ -525,6 +532,8 @@ function registerServiceWorker() {
 // ---------- Init ----------
 
 function init() {
+  els.result.hidden = true; // never trust restored page state to keep it closed
+
   els.brandLogo.addEventListener('load', () => {
     els.brandLogo.hidden = false;
   });
@@ -557,7 +566,7 @@ function init() {
   els.retake.addEventListener('click', retake);
   // Installed PWAs have no browser chrome, so this is the only way to reload —
   // a full reload lands back on the GO screen and picks up new versions online.
-  els.goHome.addEventListener('click', () => location.reload());
+  els.goHome.addEventListener('click', goHome);
   els.share.hidden = !canShareFiles();
   els.share.addEventListener('click', sharePhoto);
 
@@ -565,6 +574,12 @@ function init() {
     if (document.hidden) return;
     requestWakeLock();
     restartCameraIfDead();
+  });
+
+  window.addEventListener('pageshow', (event) => {
+    // A page restored from the back-forward cache keeps its old DOM (open
+    // modal included) — reload it so the booth always starts clean.
+    if (event.persisted) location.reload();
   });
 
   if (location.hash === '#open') openBooth(); // dev shortcut: skip the GO screen
