@@ -2,7 +2,7 @@
 
 // Bump the version whenever you change any file so devices pick up the new
 // copy on their next online visit.
-const CACHE_NAME = 'snap-studio-v27';
+const CACHE_NAME = 'snap-studio-v29';
 
 const CORE_ASSETS = [
   './',
