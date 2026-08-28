@@ -929,7 +929,8 @@ body {
 
 .btn-share,
 .btn-save,
-.btn-retake {
+.btn-retake,
+.btn-home {
   font-family: var(--font-pixel);
   font-size: 12px;
   text-decoration: none;
@@ -951,6 +952,12 @@ body {
 
 .btn-retake {
   background: var(--blue);
+}
+
+.btn-home {
+  background: var(--red);
+  font-size: 10px;
+  padding: 14px 20px;
 }
 
 .result-tip {

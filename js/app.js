@@ -47,6 +47,7 @@ const els = {
   share: document.getElementById('share'),
   saveLink: document.getElementById('save-link'),
   retake: document.getElementById('retake'),
+  goHome: document.getElementById('go-home'),
 };
 
 let stream = null;
@@ -554,6 +555,9 @@ function init() {
   els.goSnap.addEventListener('click', onGoSnap);
   els.retryCamera.addEventListener('click', startCamera);
   els.retake.addEventListener('click', retake);
+  // Installed PWAs have no browser chrome, so this is the only way to reload —
+  // a full reload lands back on the GO screen and picks up new versions online.
+  els.goHome.addEventListener('click', () => location.reload());
   els.share.hidden = !canShareFiles();
   els.share.addEventListener('click', sharePhoto);
 
